@@ -1,0 +1,45 @@
+﻿@using ShopApp.EntityLayer.Concrete
+@model List<Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<h2>Products</h2>
+<hr />
+
+<table class="table table-bordered">
+    <tr>
+        <th style="width:30px;">ID</th>
+        <th style="width:100px;">Image</th>
+        <th style="width:200px;">Name</th>
+        <th>Description</th>
+        <th style="width:12px;">Price</th>
+        <th style="width:12px;">Edit</th>
+        <th style="width:12px;">Delete</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ID</td>
+            <td>
+                <img src="~/img/@item.ImageURL" width="80" />
+            </td>
+            <td>@item.Name</td>
+            <td>@Html.Raw(item.Description)</td>
+            <td>@item.Price</td>
+            <td><a href="/Admin/EditProduct/@item.ID" class="btn btn-success">Edit</a></td>
+            <td>
+                <form action="/Admin/DeleteProduct" method="post" style="display:inline;">
+                    <input type="hidden" name="productId" value="@item.ID" />
+                    <a href="/Admin/DeleteProduct/@item.ID" class="btn btn-danger">Delete</a>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<a href="/Admin/CreateProduct/" class="btn btn-primary">New Product</a>

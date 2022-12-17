@@ -1,0 +1,24 @@
+﻿@using ShopApp.EntityLayer.Concrete
+@model List<Product>
+
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3">
+        @await Component.InvokeAsync("CategoryList")
+    </div>
+    <div class="col-md-9">
+
+        <partial name="_SliderPartial" />
+
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <partial name="_ProductPartial" for="@product" />
+            }
+        </div>
+    </div>
+</div>
